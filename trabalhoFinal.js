@@ -32,4 +32,4 @@ function cadastrarDoadores() {
     nome = ask.question("Insira o nome do doador: ")
     idade = ask.question("Insira a idade do doador: ")
     peso = ask.question("Insira")
-}//bolsonaro
+}
