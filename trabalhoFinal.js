@@ -6,9 +6,9 @@ let nome
 let idade
 let peso
 let tipoSanguineo
-let ultimaDoacao
+let dataUltimaDoacao
 
-function main() {
+function menu() {
    console.log("===== SISTEMA DE CADASTRO DE DOADORES DE SANGUE =====")
    console.log("_____________________________________________________")
    console.log("1. Cadastrar doador")
@@ -20,16 +20,41 @@ function main() {
    return ask.question("Escolha uma opcao: ")
 }
 
-main()
+menu()
 
 
 
 
-
-
-
-function cadastrarDoadores() {
-    nome = ask.question("Insira o nome do doador: ")
-    idade = ask.question("Insira a idade do doador: ")
-    peso = ask.question("Insira")
+function cadastrarDoador() {
+    nome = ask.question("Digite o nome do doador: ");
+    idade = ask.questionInt("Digite a idade do doador: ");
+    peso = ask.questionFloat("Digite o peso do doador (kg): ");
+    tipoSanguineo = ask.question("Digite o tipo sanguíneo: ");
+    dataUltimaDoacao = ask.question("Digite a data da última doação (dd/mm/aaaa): ");
+    
+    doadores.push({ nome, idade, peso, tipoSanguineo, dataUltimaDoacao });
+    console.log("Doador cadastrado com sucesso!");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
