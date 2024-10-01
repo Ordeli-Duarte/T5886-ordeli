@@ -70,21 +70,22 @@ function cadastrarDoador() {
     doadores.push(doador)
     console.log("Doador cadastrado com sucesso!")
 }
-
 function listarDoadores() {
     if (doadores.length === 0) {
         console.log("Nenhum doador cadastrado.")
         return
-    }else{
-
-    console.log("--------------------")
-    console.log("LISTA DE DOADORES:")
-    console.log("--------------------")
-    console.log("NOME             | IDADE | PESO | TIPO SANGUÍNEO | ÚLTIMA DOAÇÃO")
-    console.log("-----------------------------------------------------------------")
-    console.log(`${doador.nome}| ${doador.idade.toString()}| ${doador.peso.toString()}| ${doador.tipoSanguineo}| ${doador.dataUltimaDoacao}`)
+    }
     
+    console.log("--------------------")
+    console.log("LISTAGEM DE DOADORES:")
+    console.log("--------------------")
+    console.log("NOME             | IDADE | PESO  | TIPO SANGUÍNEO | ÚLTIMA DOAÇÃO")
+    console.log("-----------------------------------------------------------------")
+    
+    doadores.forEach(doador => {
+        console.log(`${doador.nome.padEnd(17)}| ${doador.idade.toString().padEnd(6)}| ${(doador.peso.toString() + " kg").padEnd(4)}| ${doador.tipoSanguineo.padEnd(15)}| ${doador.dataUltimaDoacao}`)
+    })
     
     console.log("-----------------------------------------------------------------")
-}}
+}
 
