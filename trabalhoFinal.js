@@ -1,6 +1,9 @@
 //Dupla: Ordeli Duarte Filho e Kauã De Souza França
 const ask = require("readline-sync")
-
+console.clear()
+let doador = {
+    
+}
 const doadores = []
 let nome
 let idade
@@ -26,10 +29,13 @@ while (sistema){
     menu()
     switch (opcao) {
         case '1':
+            console.clear()
             cadastrarDoador()
             break;
         case '2':
+            console.clear()
             listarDoadores()
+            ask.question("Tecle ENTER para continuar")
             break;
         case '3':
             buscarPorTipoSanguineo()
@@ -43,20 +49,42 @@ while (sistema){
             sistema = false
             break;
         default:
-            console.log("Opção inválida. Tente novamente.");
+            console.log("Opção inválida. Tente novamente.")
     }
 }
 
 function cadastrarDoador() {
-    nome = ask.question("Digite o nome do doador: ");
-    idade = ask.questionInt("Digite a idade do doador: ");
-    peso = ask.questionFloat("Digite o peso do doador (kg): ");
-    tipoSanguineo = ask.question("Digite o tipo sanguineo: ");
-    dataUltimaDoacao = ask.question("Digite a data da ultima doacao (dd/mm/aaaa): ");
+    nome = ask.question("Digite o nome do doador: ")
+    idade = ask.questionInt("Digite a idade do doador: ")
+    peso = ask.questionFloat("Digite o peso do doador (kg): ")
+    tipoSanguineo = ask.question("Digite o tipo sanguineo: ")
+    dataUltimaDoacao = ask.question("Digite a data da ultima doacao (dd/mm/aaaa): ")
     console.clear()
-    doadores.push({ nome, idade, peso, tipoSanguineo, dataUltimaDoacao });
-    console.log("Doador cadastrado com sucesso!");
+    doador = {
+        nome,
+        idade,
+        peso,
+        tipoSanguineo,
+        dataUltimaDoacao
+    }
+    doadores.push(doador)
+    console.log("Doador cadastrado com sucesso!")
 }
 
+function listarDoadores() {
+    if (doadores.length === 0) {
+        console.log("Nenhum doador cadastrado.")
+        return
+    }else{
 
+    console.log("--------------------")
+    console.log("LISTA DE DOADORES:")
+    console.log("--------------------")
+    console.log("NOME             | IDADE | PESO | TIPO SANGUÍNEO | ÚLTIMA DOAÇÃO")
+    console.log("-----------------------------------------------------------------")
+    console.log(`${doador.nome}| ${doador.idade.toString()}| ${doador.peso.toString()}| ${doador.tipoSanguineo}| ${doador.dataUltimaDoacao}`)
+    
+    
+    console.log("-----------------------------------------------------------------")
+}}
 
