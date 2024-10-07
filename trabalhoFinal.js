@@ -1,91 +1,133 @@
 //Dupla: Ordeli Duarte Filho e Kauã De Souza França
-const ask = require("readline-sync")
-console.clear()
-let doador = {
-    
-}
-const doadores = []
+const ask = require('readline-sync')
+
 let nome
 let idade
 let peso
 let tipoSanguineo
-let dataUltimaDoacao
-let opcao
-let sistema = true
+let ultimaDoacao
 
-function menu() {
-   console.log("===== SISTEMA DE CADASTRO DE DOADORES DE SANGUE =====")
-   console.log("_____________________________________________________")
-   console.log("1. Cadastrar doador")
-   console.log("2. Listar doadores")
-   console.log("3. Buscar doador por tipo sanguíneo")
-   console.log("4. Buscar doador por data da última doação")
-   console.log("5. Sair")
-   console.log("_____________________________________________________")
-   opcao = ask.question("Escolha uma opcao: ")
-}
+let doadores = []
 
-while (sistema){
-    menu()
-    switch (opcao) {
-        case '1':
-            console.clear()
-            cadastrarDoador()
-            break;
-        case '2':
-            console.clear()
-            listarDoadores()
-            ask.question("Tecle ENTER para continuar")
-            break;
-        case '3':
-            buscarPorTipoSanguineo()
-            break;
-        case '4':
-            buscarPorData()
-            break;
-        case '5':
-            console.clear()
-            console.log("Programa encerrado. ")
-            sistema = false
-            break;
-        default:
-            console.log("Opção inválida. Tente novamente.")
-    }
-}
-
-function cadastrarDoador() {
-    nome = ask.question("Digite o nome do doador: ")
-    idade = ask.questionInt("Digite a idade do doador: ")
-    peso = ask.questionFloat("Digite o peso do doador (kg): ")
-    tipoSanguineo = ask.question("Digite o tipo sanguineo: ")
-    dataUltimaDoacao = ask.question("Digite a data da ultima doacao (dd/mm/aaaa): ")
+function cadastrarDoador(){
     console.clear()
-    doador = {
+    nome = ask.question('Por favor, insira o nome do doador: ').toLowerCase()
+    idade = parseFloat(ask.question('Por favor, insira a idade do doador: ').toLowerCase())
+    peso = parseFloat(ask.question('por favor, insira o peso do doador em kg: '))
+    tipoSanguineo = ask.question('Por favor, insira o tipo sanguíneo do doador: ').toLowerCase()
+    dia = parseFloat(ask.question('Por favor, insira o dia da ultima doacao: '))
+    mes = parseFloat(ask.question('Por favor, insira o mes da ultima doacao: '))
+    ano = parseFloat(ask.question('Por favor, insira o ano da ultima doacao: '))
+
+    ultimaDoacao = {
+        dia,
+        mes,
+        ano
+    }
+
+    let doador = {
         nome,
         idade,
         peso,
         tipoSanguineo,
-        dataUltimaDoacao
-    }
-    doadores.push(doador)
-    console.log("Doador cadastrado com sucesso!")
-}
-function listarDoadores() {
-    if (doadores.length === 0) {
-        console.log("Nenhum doador cadastrado.")
-        return
+        ultimaDoacao
     }
     
-    console.log("--------------------")
-    console.log("LISTAGEM DE DOADORES:")
-    console.log("--------------------")
-    console.log("NOME             | IDADE | PESO  | TIPO SANGUÍNEO | ÚLTIMA DOAÇÃO")
-    console.log("-----------------------------------------------------------------")
-    
-    doadores.forEach(doador => {
-        console.log(`${doador.nome.padEnd(17)}| ${doador.idade.toString().padEnd(6)}| ${(doador.peso.toString() + " kg").padEnd(4)}| ${doador.tipoSanguineo.padEnd(15)}| ${doador.dataUltimaDoacao}`)
-    })
-    
-    console.log("-----------------------------------------------------------------")
+    if(typeof nome === 'number'){
+        console.log('nome invalido')
+    }else if(typeof idade === 'string'){
+        console.log('idade invalida')
+    }else if(typeof peso === 'string'){
+        console.log('peso invalido')
+    }else if(typeof tipoSanguineo === 'number'){
+        console.log('tipo sanguineo invalido')
+    }else{
+        doadores.push(doador)
+    }
 }
 
+function listarDoadores(){
+    console.clear()
+    console.log('____________________________________________________________________________________________________________')
+    console.log('Doadores atuais')
+    console.log('____________________________________________________________________________________________________________')
+    for (let a of doadores) {
+        console.log(`Nome: ${a.nome}\nIdade: ${a.idade}\nPeso: ${a.peso}\nTipo sanguineo: ${a.tipoSanguineo}\nUltima doacao: ${a.ultimaDoacao.dia}/${a.ultimaDoacao.mes}/${a.ultimaDoacao.ano}\n____________________________________________________________________________________________________________\n`)
+    }
+    let z = ask.question('Pressione qualquer coisa para continuar: ')
+}
+
+function buscarPorTipoSanguineo(){
+    console.clear()
+    let auxiliar1 = ask.question('Digite o tipo de sangue que você deseja procurar: ').toLowerCase()
+    for (let b of doadores) {
+        if(auxiliar1 === b.tipoSanguineo){
+            console.log(b)
+        }else{
+            console.log('Nenhum doador encontrado')
+        }
+    }
+    let y = ask.question('Digite qualquer coisa para continuar: ')
+}
+
+function buscarPorUltimaDoacao(){
+    console.clear()
+    let auxiliar2 = ask.question('insira o dia: ')
+    let auxiliar3 = ask.question('insira o mes: ')
+    let auxiliar4 = ask.question('insira o ano: ')
+
+    for (const c of doadores) {
+        if(auxiliar2 > 31 && auxiliar2 < 0){
+        }else if(c.ultimaDoacao.ano <= auxiliar4){
+            console.log(c)
+        }else if(c.ultimaDoacao.mes <= auxiliar3 && c.ultimaDoacao.dia <= auxiliar2 && c.ultimaDoacao.ano <= auxiliar4){
+            console.log(c)
+        }else if(c.ultimaDoacao.dia <= auxiliar2 && c.ultimaDoacao.mes <= auxiliar3 && c.ultimaDoacao.ano === auxiliar4){
+            console.log(c)
+        }else if(c.ultimaDoacao.dia <= auxiliar2 && c.ultimaDoacao.mes === auxiliar3 && c.ultimaDoacao.ano === auxiliar4){
+            console.log(c)
+        }else if(c.ultimaDoacao.dia === auxiliar2 && c.ultimaDoacao.mes <= auxiliar3 && c.ultimaDoacao.ano <= auxiliar4){
+            console.log(c)
+        }else{
+            console.log('Nenhum doador encontrado')
+        }
+    }
+    let x = ask.question('Digite qualquer coisa para continuar: ')
+}
+
+function principal(){
+    console.clear()
+    console.log('_______________________________________________________________________')
+    console.log('[1] Cadastrar doador')
+    console.log('[2] Listar doadores atuais')
+    console.log('[3] Buscar doador por tipo sanguineo')
+    console.log('[4] Buscar doador por data de doacao')
+    console.log('[5] Sair')
+    console.log('_______________________________________________________________________')
+    console.log()
+    let auxiliar5 = ask.question('Digite um dos numeros que estao acima: ')
+    return Number(auxiliar5)
+}
+
+let ativoPrograma = true
+
+while(ativoPrograma){
+    console.clear()
+    switch(principal()){
+        case 1:
+            cadastrarDoador()
+            break
+        case 2:
+            listarDoadores()
+            break
+        case 3:
+            buscarPorTipoSanguineo()
+            break
+        case 4:
+            buscarPorUltimaDoacao()
+            break
+        case 5:
+            ativoPrograma = false
+            break
+    }
+}
